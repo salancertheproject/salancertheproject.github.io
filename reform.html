@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  form {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+
+  #messageDiv {
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+  }
+    h1, h2 {
+    text-align: center;
+  }
+</style>
+  <title>Admin Panel</title>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+</head>
+<body>
+    <h1>ADMIN PANEL(Hadi Travels)</h1>
+    <h2>Click <a href="apnaorderchecker.html" class="clickHereLink disabled" data-href="apnaorderchecker.html"><u>here</u></a> to check orders</h2>
+    <h2>Click <a href="newsletter.html" class="clickHereLink disabled" data-href="newsletter.html"><u>here</u></a> to check news letter emails</h2>
+    <h2>Click <a href="messages.html" class="clickHereLink disabled" data-href="messages.html"><u>here</u></a> to check messages</h2>
+    <h2>Click <a href="messaes2.html" class="clickHereLink disabled" data-href="messaes2.html"><u>here</u></a> to check 2 messages</h2>
+  <h2>Login to Manage Packages</h2>
+  <label for="email">Email:</label>
+  <input type="email" id="email" placeholder="Enter your email">
+  <label for="password">Password:</label>
+  <input type="password" id="password" placeholder="Enter your password">
+  <button id="loginButton" onclick="login()">Login</button>
+
+  <h2>Add new domestic Package</h2>
+  <select id="platformSelect" onchange="checkCustom()">
+    <option value="youtube">YouTube</option>
+    <option value="tiktok">TikTok</option>
+    <option value="instagram">Instagram</option>
+    <option value="facebook">Facebook</option>
+    <option value="custom">Other (Please specify)</option>
+</select><br>
+    <input type="text" id="sub" placeholder="Enter subscribers">
+    <label for="itemImageInput">Select youtube studio image:</label>
+    <input type="file" id="itemImageInput" accept="image/*">
+  <input type="text" id="link" placeholder="Enter channel link">
+  <button id="saveItemButton" onclick="saveItem()" disabled>Save Item</button>
+
+  <h2>Remove Existing domestic Package </h2>
+  <input type="text" id="itemIdToRemove" placeholder="Enter Package name to remove">
+  <button id="removeItemButton" onclick="removeItem()" disabled>Remove Item</button>
+
+  <div id="messageDiv"></div>
+
+  <script src="firebase.js"></script>
+  <script>
+ function checkCustom() {
+    var selectElement = document.getElementById("platformSelect");
+    var customPlatformInput = document.getElementById("customPlatform");
+
+    if (selectElement.value === "custom") {
+        customPlatformInput.style.display = "block";
+    } else {
+        customPlatformInput.style.display = "none";
+    }
+}
+    firebase.initializeApp(firebaseConfig);
+
+    var database = firebase.database();
+    var itemsRef = database.ref("domestic");
+
+    function showMessage(message, isError) {
+      var messageDiv = document.getElementById("messageDiv");
+      messageDiv.innerHTML = message;
+      messageDiv.style.color = isError ? "red" : "green";
+    }
+
+    function login() {
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+
+      var loginButton = document.getElementById("loginButton");
+      loginButton.disabled = true;
+
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function(userCredential) {
+          var user = userCredential.user;
+          console.log("User logged in successfully:", user);
+          enableButtons();
+          showMessage("Login successful!", false);
+        })
+        .catch(function(error) {
+          console.error("Error logging in: ", error);
+          loginButton.disabled = false;
+          showMessage("Error logging in. Please check your credentials.", true);
+        });
+    }
+
+    function enableButtons() {
+    var saveItemButton = document.getElementById("saveItemButton");
+    var removeItemButton = document.getElementById("removeItemButton");
+    var saveItemButton2 = document.getElementById("saveItemButton2");
+    var removeItemButton2 = document.getElementById("removeItemButton2");
+    var saveItemButton3 = document.getElementById("saveItemButton3");
+    var removeItemButton3 = document.getElementById("removeItemButton3");
+    var clickHereLinks = document.querySelectorAll(".clickHereLink");
+    var saveItemButton4 = document.getElementById("saveItemButton4");
+    var removeItemButton4 = document.getElementById("removeItemButton4");
+    var saveItemButton5 = document.getElementById("saveItemButton5");
+    var removeItemButton5 = document.getElementById("removeItemButton5");
+
+    saveItemButton.disabled = false;
+    removeItemButton.disabled = false;
+    saveItemButton2.disabled = false;
+    removeItemButton2.disabled = false;
+    saveItemButton3.disabled = false;
+    removeItemButton3.disabled = false;
+    saveItemButton4.disabled = false;
+    removeItemButton4.disabled = false;
+    saveItemButton5.disabled = false;
+    removeItemButton5.disabled = false;
+
+
+    // Enable click here links
+    clickHereLinks.forEach(link => {
+      link.classList.remove("disabled");
+      link.href = link.dataset.href;
+    });
+  }
+
+
+    function saveItem() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var saveItemButton = document.getElementById("saveItemButton");
+      saveItemButton.disabled = true;
+
+      var itemName = document.getElementById("platform").value.trim();
+      var itemPrice = document.getElementById("sub").value;
+      var itemImageInput = document.getElementById("itemImageInput");
+      var itemDescription = document.getElementById("link").value;
+      var itemId = itemName;
+
+      var item = {
+        image: "", // You will need to upload the image to a storage service and get the URL
+        name: itemName,
+        price: itemPrice,
+        description: itemDescription,
+        descriptionnext: itemDescriptionnext
+      };
+
+      // Upload the image to a storage service and get the URL
+      var file = itemImageInput.files[0];
+      var storageRef = firebase.storage().ref('itemImages/' + file.name);
+      var task = storageRef.put(file);
+
+      task.on('state_changed',
+        function progress(snapshot) {
+          var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + percentage + '% done');
+        },
+        function error(err) {
+          console.error("Error uploading image: ", err);
+          showMessage("Error uploading image. Please try again.", true);
+        },
+        function complete() {
+          task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            item.image = downloadURL;
+            // Save the item with the image URL
+            itemsRef.child(itemId).set(item)
+              .then(function() {
+                console.log("Item saved successfully!");
+                showMessage("Item saved successfully!", false);
+              })
+              .catch(function(error) {
+                console.error("Error saving item: ", error);
+                showMessage("Error saving item. Please try again.", true);
+              });
+
+            saveItemButton.disabled = false;
+          });
+        }
+      );
+    } else {
+      console.error("User not logged in. Please log in to add items.");
+    }
+  });
+}
+
+    function removeItem() {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          var removeItemButton = document.getElementById("removeItemButton");
+          removeItemButton.disabled = true;
+
+          var itemIdToRemove = document.getElementById("itemIdToRemove").value;
+
+          itemsRef.child(itemIdToRemove).remove()
+            .then(function() {
+              console.log("Item removed successfully!");
+              showMessage("Item removed successfully!", false);
+            })
+            .catch(function(error) {
+              console.error("Error removing item: ", error);
+              showMessage("Error removing item. Please try again.", true);
+            });
+
+          removeItemButton.disabled = false;
+        } else {
+          console.error("User not logged in. Please log in to remove items.");
+        }
+      });
+    }
+    
+  
+  </script>
+</body>
+</html>
