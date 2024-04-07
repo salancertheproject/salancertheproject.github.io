@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Packages</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="packages.css" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Include the Firebase JavaScript SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
+    <!-- Include any other dependencies you might need -->
+    <script src="path/to/other/dependencies.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <!--------------------------------------------------------- Header ------------------------------------------->
+
+    <div class="header">
+      <button onclick="openNav()" class="navbar-toggler" type="button">
+        <i class="ri-menu-line"></i>
+      </button>
+      <a class="a-logo" href="index.html"
+        ><img class="logo" src="images/finalogo.png"
+      /></a>
+
+      <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html" target="_blank">About Us</a>
+        <a href="packages.html" target="_blank">Packages</a>
+        <a href="visa.html" target="_blank">Visa's</a>
+        <a href="vlog.html" target="_blank">Vlogs</a>
+        <a href="bussiness-details.html" target="_blank">Details</a>
+        <a href="contact-page2/contact.html" target="_blank">Contact Us</a>
+      </nav>
+
+      <aside class="sidepanel" id="mysidepanel">
+        <div class="sidebar flex">
+          <button
+            onclick="closeNav()"
+            type="button"
+            class="closebtn btn_hover1"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <!-- -----------side menus--------------- -->
+        <ul>
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="packages.html" class="nav-link">Packages</a></li>
+          <li><a href="visa.html" class="nav-link">Visa's</a></li>
+          <li><a href="vlog.html" class="nav-link">Vlogs</a></li>
+          <li><a href="bussiness-details.html" class="nav-link">Details</a></li>
+          <li>
+            <a href="contact-page2/contact.html" class="nav-link">Contact Us</a>
+          </li>
+        </ul>
+      </aside>
+
+      <a href="tel:+923007030303" class="btn">Book Now</a>
+    </div>
+
+    <!--------------------------------------------------------- Packages ------------------------------------------->
+
+    <section class="packages">
+      <div class="heading">
+        <span class="packages-span">Our Packages</span>
+        <h1>DOMESTIC PACKAGES</h1>
+      </div>
+
+      <div class="packages-box-container">
+        <div id="menu"></div>
+      </div>
+    </section>
+    <br />
+    
+
+    <div class="hr">
+      <hr class="footer-hr" />
+    </div>
+
+    <!--------------------------------------------------------- Footer ------------------------------------------->
+
+    <section class="footer" data-aos="zoom-out-right">
+      <div class="box-container">
+        <div class="box">
+          <a href="#"
+            ><img class="logo footer-logo" src="images/finalogo.png"
+          /></a>
+          <p>
+            "Discover the world with convenience and assurance. Experience
+            seamless travel planning tailored just for you."
+          </p>
+          <div class="socials">
+            <a href="https://www.facebook.com/AlHadiAviation?mibextid=kFxxJD"
+              ><img class="socials-icons" src="images/facebook.png"
+            /></a>
+            <a
+              href="https://www.instagram.com/hadi_travels?fbclid=IwAR1dMkVbsVUQThg-0PpeFLsAEIJ1LfWVqTj6vBcc7tlwbiq-HwDSWckv9OI"
+              ><img class="socials-icons" src="images/instagram.png"
+            /></a>
+            <a href="https://wa.me/+923007030303"
+              ><img class="socials-icons" src="images/whatsaap.png"
+            /></a>
+            <a href="mailto:info@haditravels.com"
+              ><img class="socials-icons" src="images/mail.png"
+            /></a>
+            <a href="https://maps.app.goo.gl/NDRAbCDvNXHKxT4E8"
+              ><img class="socials-icons" src="images/maps.png"
+            /></a>
+          </div>
+        </div>
+
+        <div class="box">
+          <h3>Quick Links</h3>
+          <a href="#home" class="links"
+            ><i class="fa-solid fa-arrow-right"></i>Home</a
+          >
+          <a href="#book-form" class="links"
+            ><i class="fa-solid fa-arrow-right"></i>Book Now</a
+          >
+          <a href="#about" class="links"
+            ><i class="fa-solid fa-arrow-right"></i>About</a
+          >
+          <a href="#packages" class="links"
+            ><i class="fa-solid fa-arrow-right"></i>Packages</a
+          >
+          <a href="#services" class="links"
+            ><i class="fa-solid fa-arrow-right"></i>Services</a
+          >
+          <a href="#gallery" class="links"
+            ><i class="fa-solid fa-arrow-right"></i>Gallery</a
+          >
+        </div>
+
+        <div class="box contact-info">
+          <h3>Contact Info</h3>
+          <p>
+            <i class="fa-solid fa-map-location-dot"></i>G-2A, court view <br />
+            apartment, court road, karachi
+          </p>
+          <p><i class="fa-solid fa-phone"></i>02133378466</p>
+          <p><i class="fa-solid fa-envelope"></i>info@haditravels.com</p>
+          <p><i class="fa-solid fa-clock"></i>10:00 am - 10:00 pm</p>
+        </div>
+
+        <div class="box">
+          <h3>NewsLetter</h3>
+          <p>Subscribe For latest Updates</p>
+          <form action="" id="newsletter">
+            <input
+              type="email"
+              id="email"
+              name=""
+              placeholder="Drop your email"
+              class="newsletter"
+            />
+            <input type="submit" value="subscribe" class="btn" />
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="copywrite"><span>Hadi-Travels</span> | all rights reserved</div>
+
+    <!-- ------------backtotop ------------------>
+    <button class="instagrmBar" id="instagrmBar">
+      <a href="https://wa.me/+923007030303"
+        ><img class="socials-icons" src="images/whatsaap.png"
+      /></a>
+    </button>
+
+    <script>
+      function redirectToUrl(itemName) {
+        // Save itemName to localStorage
+        localStorage.setItem("itemName", itemName);
+
+        var url = "/view.html";
+        window.location.href = url;
+      }
+      function redirectToUrl2(itemName) {
+        // Save itemName to localStorage
+        localStorage.setItem("itemName", itemName);
+
+        var url = "/view2.html";
+        window.location.href = url;
+      }
+      function redirectToUrl3(itemName) {
+        // Save itemName to localStorage
+        localStorage.setItem("itemName", itemName);
+
+        var url = "/view3.html";
+        window.location.href = url;
+      }
+
+      // ---------------------------------------------Preload--------------------------------------------
+
+      // loading will end after document is loaded
+
+      const preloader = document.querySelector("[data-preaload]");
+
+      window.addEventListener("load", function () {
+        preloader.classList.add("loaded");
+        document.body.classList.add("loaded");
+      });
+
+      let navbar = document.querySelector(".header .navbar");
+
+      document.querySelector("#menu-btn").onclick = () => {
+        navbar.classList.toggle("active");
+      };
+
+      // --------------------------------------------------Sidebar------------------------------------------
+
+      function openNav() {
+        const sidePanel = document.getElementById("mysidepanel");
+        if (sidePanel) {
+          sidePanel.style.left = "0";
+        } else {
+          console.error("sidepanel not found");
+        }
+      }
+      function closeNav() {
+        const sidePanel = document.getElementById("mysidepanel");
+        if (sidePanel) {
+          sidePanel.style.left = "-320px";
+        }
+      }
+
+      //----------------------------------------------- Hero section slider------------------------------
+      let nextDom = document.getElementById("next");
+      let prevDom = document.getElementById("prev");
+
+      let sliderDom = document.querySelector(".slider");
+      let SliderDom = sliderDom.querySelector(".slider .list");
+      let thumbnailBorderDom = document.querySelector(".slider .thumbnail");
+      let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll(".item");
+      let timeDom = document.querySelector(".slider .time");
+
+      thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+      let timeRunning = 3000;
+      let timeAutoNext = 7000;
+
+      nextDom.onclick = function () {
+        showSlider("next");
+      };
+
+      prevDom.onclick = function () {
+        showSlider("prev");
+      };
+      let runTimeOut;
+      let runNextAuto = setTimeout(() => {
+        next.click();
+      }, timeAutoNext);
+      function showSlider(type) {
+        let SliderItemsDom = SliderDom.querySelectorAll(".slider .list .item");
+        let thumbnailItemsDom = document.querySelectorAll(
+          ".slider .thumbnail .item"
+        );
+
+        if (type === "next") {
+          SliderDom.appendChild(SliderItemsDom[0]);
+          thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+          sliderDom.classList.add("next");
+        } else {
+          SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+          thumbnailBorderDom.prepend(
+            thumbnailItemsDom[thumbnailItemsDom.length - 1]
+          );
+          sliderDom.classList.add("prev");
+        }
+        clearTimeout(runTimeOut);
+        runTimeOut = setTimeout(() => {
+          sliderDom.classList.remove("next");
+          sliderDom.classList.remove("prev");
+        }, timeRunning);
+
+        clearTimeout(runNextAuto);
+        runNextAuto = setTimeout(() => {
+          next.click();
+        }, timeAutoNext);
+      }
+
+      // ------------------------------------------------about us video slider-------------------------------------
+      document
+        .querySelectorAll(".about .video-container .controls .control-btn")
+        .forEach((btn) => {
+          btn.onclick = () => {
+            let src = btn.getAttribute("data-src");
+            document.querySelector(".about .video-container .video").src = src;
+          };
+        });
+
+      // --------------- Back to Top btn -------------------------
+
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 20 ||
+          document.documentElement.scrollTop > 20
+        ) {
+          document.getElementById("backToTop").style.display = "block";
+        } else {
+          document.getElementById("backToTop").style.display = "none";
+        }
+      }
+
+      function scrollToTop() {
+        const scrollToTopBtn = document.documentElement || document.body;
+        scrollToTopBtn.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    </script>
+    <script src="firebase.js"></script>
+    <script>
+      firebase.initializeApp(firebaseConfig);
+
+      // Get a reference to the database
+      var database = firebase.database();
+
+      // Fetch menu data from Firebase
+      var menuRef = database.ref("domestic");
+      menuRef.on("value", function (snapshot) {
+        var menuData = snapshot.val();
+
+        // Display menu data on the web page
+        var menuContainer = document.getElementById("menu");
+        menuContainer.innerHTML = "";
+
+        for (var key in menuData) {
+          if (menuData.hasOwnProperty(key)) {
+            var menuItem = menuData[key];
+            var menuItemElement = document.createElement("div");
+            menuItemElement.innerHTML = `
+            
+            <button class="btn-package" onclick="redirectToUrl('${menuItem.name}')">
+        <div class="packagesBox">
+            <div class="image">
+                <img src="${menuItem.image}" alt="${menuItem.name}" class="menu-image">
+            </div>
+            <div class="content">
+                <div class="package-details">    
+                    <div class="package-name">    
+                        <h2 class="multiline-ellipsis-2">${menuItem.name}</h2>
+                    </div>
+                    <div class="package-price">        
+                        <h4 class="multiline-ellipsis-3">Rs ${menuItem.price}</h4>
+                    </div>    
+                </div>    
+                <p class="multiline-ellipsis">${menuItem.description}</p>
+            </div>    
+        </div> </button>
+`;
+
+            menuContainer.appendChild(menuItemElement);
+          }
+        }
+      });
+      // Fetch menu data from Firebase
+ 
+    </script>
+  </body>
+</html>

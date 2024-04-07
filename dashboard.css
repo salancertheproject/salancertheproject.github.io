@@ -1,0 +1,66 @@
+:root {
+    --gold-color: #c6974a;
+    --black-color: #0d0d0d;
+    --white-color: #fff;
+    --light-color: #aaa;
+    --bg-color: #222;
+    --black-bg: rgba(17, 17, 17, 0.7);
+    --border: 0.2rem solid #c6974a;
+  }
+  
+  #userDataDisplay {
+    color: white;
+    padding: 3rem 9%;
+    display: flex;
+  }
+  #userDataDisplay div {
+    font-size: 3rem;
+    line-height: 8rem;
+  }
+  #userDataDisplay img {
+    width: 27rem;
+    height: 27rem;
+    border-radius: 50%;
+  }
+  .dashboard {
+    margin-top: 13rem;
+    text-align: center;
+  }
+  
+  .userdisplay-container {
+    display: flex;
+  }
+  
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+  }
+  .buttons-container button {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    border: var(--border);
+    background-color: transparent;
+    color: var(--gold-color);
+    border-radius: 5rem;
+    cursor: pointer;
+    font-weight: 800;
+  }
+  
+  .buttons-container button:hover {
+    background: var(--gold-color);
+    color: var(--black-color);
+  }
+  
+  .buttons-container input {
+    font-size: 1.5rem;
+    padding: 1.5rem;
+    border: var(--border);
+    background-color: transparent;
+    color: var(--gold-color);
+    border-radius: 5rem;
+    cursor: pointer;
+    font-weight: 800;
+    width: 45%;
+  }
