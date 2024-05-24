@@ -182,12 +182,19 @@
         <button class="btn" onclick="uploadImage()">Upload Image</button>
       </div>
     </div>
-    <button id="signOutButton">Sign Out</button>
+    <input type="text" id="Name" placeholder="Enter Channel name">
+    <label for="itemImageInput">Select logo:</label>
+    <input type="file" id="itemImageInput" accept="image/*">
+    <input type="text" id="Description" placeholder="Enter Description">
+  <button id="saveItemButton" onclick="saveItem()" >Save</button>
+    <button id="signOutButton">Sign Out</button>  
+    
     <!-- ---------------------------------- backend start ----------------------------------- -->
 
 
     
     <script>
+      
       console.log(document.getElementById("userDataDisplay"));
 
       document.addEventListener("DOMContentLoaded", function() {
@@ -278,6 +285,104 @@ signOutButton.addEventListener("click", function() {
     
    window.location.href = "login.html";
 });
+var database = firebase.database();
+    var itemsRef = database.ref("creator");
+
+    function showMessage(message, isError) {
+      var messageDiv = document.getElementById("messageDiv");
+      messageDiv.innerHTML = message;
+      messageDiv.style.color = isError ? "red" : "green";
+    }
+function saveItem() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var saveItemButton = document.getElementById("saveItemButton");
+
+      var itemName = document.getElementById("Name").value;
+      var itemImageInput = document.getElementById("itemImageInput");
+      var itemDescription = document.getElementById("Description").value;
+      var itemId = itemName;
+
+      var item = {
+        image: "", // You will need to upload the image to a storage service and get the URL
+        name: itemName,
+        description: itemDescription,
+      };
+
+      // Upload the image to a storage service and get the URL
+      var file = itemImageInput.files[0];
+      var storageRef = firebase.storage().ref('itemImages/' + file.name);
+      var task = storageRef.put(file);
+
+      task.on('state_changed',
+        function progress(snapshot) {
+          var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + percentage + '% done');
+        },
+        function error(err) {
+          console.error("Error uploading image: ", err);
+          showMessage("Error uploading image. Please try again.", true);
+        },
+        function complete() {
+          task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            item.image = downloadURL;
+            // Save the item with the image URL
+            itemsRef.child(itemId).set(item)
+              .then(function() {
+                console.log("Item saved successfully!");
+                showMessage("Item saved successfully!", false);
+              })
+              .catch(function(error) {
+                console.error("Error saving item: ", error);
+                showMessage("Error saving item. Please try again.", true);
+              });
+
+            saveItemButton.disabled = false;
+          });
+        }
+      );
+    } else {
+      console.error("User not logged in. Please log in to add items.");
+    }
+  });
+}
+var database = firebase.database();
+
+// Reference to the data node in Firebase
+var userDataRef = database.ref('userData');
+
+// Function to check if a field has data
+function hasData(value) {
+  return value && value.trim() !== "";
+}
+
+// Function to toggle visibility based on data presence
+function toggleInputs(userData) {
+  var inputsContainer = document.getElementById("inputs");
+  var nameInput = document.getElementById("Name");
+  var descriptionInput = document.getElementById("Description");
+
+  if (userData && hasData(userData.name) || hasData(userData.description)) {
+    // If data exists, show inputs
+    inputsContainer.style.display = "block";
+    if (hasData(userData.name)) nameInput.value = userData.name;
+    if (hasData(userData.description)) descriptionInput.value = userData.description;
+  } else {
+    // If no data, hide inputs
+    inputsContainer.style.display = "none";
+  }
+}
+
+// Function to retrieve data from Firebase
+function fetchData() {
+  userDataRef.once('value', function(snapshot) {
+    var userData = snapshot.val();
+    toggleInputs(userData);
+  });
+}
+
+// Call the function to fetch data from Firebase
+fetchData();
     </script>
   </body>
 </html>
