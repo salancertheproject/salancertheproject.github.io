@@ -11,7 +11,7 @@ function login(event) {
             var user = userCredential.user;
   
             // Save email in browser's local storage
-            localStorage.setItem('loggedInUserEmail', email);
+            localStorage.setItem('loggedInUserEmail', user.uid);
             
             // Display a success message in the console
             console.log("Login successful");
@@ -30,7 +30,7 @@ function login(event) {
     var regEmail = document.getElementById("emailr").value.toLowerCase(); // Convert email to lowercase
     var regPassword = document.getElementById("passwordr").value;
     var regName = document.getElementById("namer").value;
-  
+
     firebase.auth().createUserWithEmailAndPassword(regEmail, regPassword)
         .then(function(userCredential) {
             // Registration successful
@@ -38,12 +38,12 @@ function login(event) {
             var user2 = userCredential.user;
             var userId2 = user2.uid;
             var userEmail2 = user2.email;
-            localStorage.setItem('loggedInUserEmail', userEmail2);
+            localStorage.setItem('loggedInUserEmail', userId2); // Store the user's email in localStorage
   
-            // Create a new data node in the Firebase Realtime Database with the email as the key
+            // Create a new data node in the Firebase Realtime Database with the user ID as the key
             var database = firebase.database();
             var usersRef = database.ref('users');
-            usersRef.child(regEmail.replace('.', ',')).set({
+            usersRef.child(userId2.replace('.', ',')).set({
                 email: regEmail,
                 name: regName
             }, function(error) {
@@ -59,7 +59,8 @@ function login(event) {
             // Handle registration error
             alert("Error: " + error.message);
         });
-  }
+}
+
   function signInWithGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider();
     
@@ -69,7 +70,7 @@ function login(event) {
             var userEmail = user.email;
             var userName = user.displayName; // Get the user's display name from Google
             var userPhotoUrl = user.photoURL; // Get the user's profile picture URL
-            localStorage.setItem('loggedInUserEmail', userEmail);
+            localStorage.setItem('loggedInUserEmail', user2.uid);
             // Check if the user is new (first time signing in)
             var database = firebase.database();
             var usersRef = database.ref('users');

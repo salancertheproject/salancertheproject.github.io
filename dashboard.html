@@ -37,13 +37,9 @@
   <script>
    function uploadImage() {
   var userEmail = localStorage.getItem("loggedInUserEmail");
-  if (userEmail) {
-    // Convert email to lowercase
-    userEmail = userEmail.toLowerCase();
-    var modifiedEmail = userEmail.replace(/\./g, ",");
-    
+  console.log(userEmail);
     // Use modifiedEmail to access the specific container in Firebase
-    var userRef = firebase.database().ref("users/" + modifiedEmail);
+    var userRef = firebase.database().ref("users/" + userEmail);
     var imageInput = document.getElementById("imageInput");
     var file = imageInput.files[0]; // Get the selected file
     
@@ -79,7 +75,7 @@
       console.error('No file selected');
     }
   }
-}
+
 
   </script>
   </head>
@@ -195,11 +191,11 @@
 var userEmail = localStorage.getItem("loggedInUserEmail");
 if (userEmail) {
   // Convert email to lowercase
-  userEmail = userEmail.toLowerCase();
-  var modifiedEmail = userEmail.replace(/\./g, ",");
+  userEmail2 = userEmail.toLowerCase();
+  var modifiedEmail2 = userEmail2.replace(/\./g, ",");
 
   // Use modifiedEmail to access the specific container in Firebase
-  var userRef = firebase.database().ref("users/" + modifiedEmail);
+  var userRef = firebase.database().ref("users/" + userEmail);
 
   userRef
     .once("value")

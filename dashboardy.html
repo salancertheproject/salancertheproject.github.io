@@ -346,43 +346,7 @@ function saveItem() {
     }
   });
 }
-var database = firebase.database();
 
-// Reference to the data node in Firebase
-var userDataRef = database.ref('userData');
-
-// Function to check if a field has data
-function hasData(value) {
-  return value && value.trim() !== "";
-}
-
-// Function to toggle visibility based on data presence
-function toggleInputs(userData) {
-  var inputsContainer = document.getElementById("inputs");
-  var nameInput = document.getElementById("Name");
-  var descriptionInput = document.getElementById("Description");
-
-  if (userData && hasData(userData.name) || hasData(userData.description)) {
-    // If data exists, show inputs
-    inputsContainer.style.display = "block";
-    if (hasData(userData.name)) nameInput.value = userData.name;
-    if (hasData(userData.description)) descriptionInput.value = userData.description;
-  } else {
-    // If no data, hide inputs
-    inputsContainer.style.display = "none";
-  }
-}
-
-// Function to retrieve data from Firebase
-function fetchData() {
-  userDataRef.once('value', function(snapshot) {
-    var userData = snapshot.val();
-    toggleInputs(userData);
-  });
-}
-
-// Call the function to fetch data from Firebase
-fetchData();
     </script>
   </body>
 </html>
